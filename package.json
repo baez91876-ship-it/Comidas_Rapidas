@@ -1,0 +1,12 @@
+{
+  "name": "vue_hoy",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix hoy run dev",
+    "build": "npm --prefix hoy run build",
+    "preview": "npm --prefix hoy run preview"
+  },
+  "dependencies": {
+    "mongoose": "^9.9.5"
+  }
+}
