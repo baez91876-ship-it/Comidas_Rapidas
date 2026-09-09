@@ -4,8 +4,12 @@ const routes = [
     component: () => import('@/pages/IndexPage.vue')
   },
   {
-    path: '/second',
-    component: () => import('@/pages/SecondPage.vue')
+    path: '/categoria/:slug',
+    component: () => import('@/pages/CategoryPage.vue')
+  },
+  {
+    path: '/nosotros',
+    component: () => import('@/pages/NosotrosPage.vue')
   },
 
   // Always leave this as last one,

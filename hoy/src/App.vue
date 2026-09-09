@@ -71,7 +71,7 @@
               <q-icon name="local_fire_department" size="28px" color="accent" />
               <div class="text-subtitle1 text-weight-bold q-mt-sm">Antojo de hoy</div>
               <div class="text-caption text-grey-7">Descubre algo delicioso para compartir.</div>
-              <q-btn unelevated color="accent" label="Ver promociones" to="/second" class="q-mt-md full-width" />
+              <q-btn unelevated color="accent" label="Ver promociones" to="/categoria/promociones" class="q-mt-md full-width" />
             </q-card-section>
           </q-card>
         </div>
@@ -107,13 +107,19 @@
 
 <script setup>
 import { ref } from 'vue'
+import { categories } from '@/data/menu'
 
 const drawerOpen = ref(false)
 const activeTab = ref('/')
 
 const menuItems = [
   { label: 'Inicio', icon: 'home', to: '/' },
-  { label: 'Nuestro menu', icon: 'restaurant_menu', to: '/second' }
+  ...categories.map((category) => ({
+    label: category.label,
+    icon: category.icon,
+    to: `/categoria/${category.slug}`
+  })),
+  { label: 'Nosotros', icon: 'groups', to: '/nosotros' }
 ]
 </script>
 
