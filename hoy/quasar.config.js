@@ -41,7 +41,7 @@ export default defineConfig((/* ctx */) => {
       // filenameBasedRouting: true,
 
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-      // vueRouterBase,
+      publicPath: '/Comidas_Rapidas/',
 
       // publicPath: '/',
       // define: {},
