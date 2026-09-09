@@ -79,25 +79,51 @@
 
       <q-page-container>
         <div class="desktop-nav content-width q-px-md q-px-lg-xl">
-          <q-tabs
-            v-model="activeTab"
-            dense
+          <q-btn flat no-caps icon="home" label="Inicio" to="/" class="nav-link" />
+          <q-btn-dropdown
+            flat
             no-caps
-            inline-label
-            active-color="accent"
-            indicator-color="accent"
-            class="text-grey-7"
+            split
+            icon="restaurant_menu"
+            label="Explorar menu"
+            class="menu-dropdown"
           >
-            <q-route-tab
-              v-for="item in menuItems"
-              :key="item.to"
-              :name="item.to"
-              :to="item.to"
-              :label="item.label"
-              :icon="item.icon"
-              exact
-            />
-          </q-tabs>
+            <div class="dropdown-panel">
+              <div class="dropdown-intro">
+                <div class="dropdown-kicker">Menu digital</div>
+                <div class="dropdown-title">Elige tu antojo</div>
+                <div class="dropdown-description">Todo preparado al momento.</div>
+              </div>
+              <q-list class="category-list">
+                <q-item
+                  v-for="category in categories"
+                  :key="category.slug"
+                  v-close-popup
+                  clickable
+                  :to="`/categoria/${category.slug}`"
+                  class="category-option"
+                >
+                  <q-item-section avatar>
+                    <q-icon :name="category.icon" size="24px" color="accent" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>{{ category.label }}</q-item-label>
+                    <q-item-label caption>Ver productos</q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-icon name="arrow_forward" size="18px" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+              <q-separator />
+              <q-item v-close-popup clickable to="/nosotros" class="about-option">
+                <q-item-section avatar><q-icon name="groups" size="22px" /></q-item-section>
+                <q-item-section>Conoce nuestro equipo</q-item-section>
+                <q-item-section side><q-icon name="arrow_forward" size="18px" /></q-item-section>
+              </q-item>
+            </div>
+          </q-btn-dropdown>
+          <q-btn flat no-caps icon="groups" label="Nosotros" to="/nosotros" class="nav-link" />
         </div>
         <router-view />
       </q-page-container>
@@ -110,7 +136,6 @@ import { ref } from 'vue'
 import { categories } from '@/data/menu'
 
 const drawerOpen = ref(false)
-const activeTab = ref('/')
 
 const menuItems = [
   { label: 'Inicio', icon: 'home', to: '/' },
@@ -182,8 +207,69 @@ const menuItems = [
 }
 
 .desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 54px;
   background: #fffaf0;
   border-bottom: 1px solid #e9e3d6;
+}
+
+.nav-link,
+.menu-dropdown {
+  color: #5f6961;
+}
+
+.dropdown-panel {
+  width: min(640px, calc(100vw - 32px));
+  padding: 18px;
+  background: #fffaf0;
+}
+
+.dropdown-intro {
+  padding: 4px 12px 14px;
+}
+
+.dropdown-kicker {
+  color: #b56a2c;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.dropdown-title {
+  margin-top: 4px;
+  color: #1d2420;
+  font-size: 22px;
+  font-weight: 850;
+}
+
+.dropdown-description {
+  color: #7d867e;
+  font-size: 12px;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.category-option,
+.about-option {
+  min-height: 64px;
+  border-radius: 10px;
+  color: #1d2420;
+}
+
+.category-option:hover,
+.about-option:hover {
+  background: #f5e8d0;
+}
+
+.category-option .q-item__label--caption {
+  color: #8a928b;
 }
 
 .app-drawer {
@@ -225,6 +311,12 @@ const menuItems = [
 @media (max-width: 599px) {
   .desktop-nav {
     display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .category-list {
+    grid-template-columns: 1fr;
   }
 }
 </style>
