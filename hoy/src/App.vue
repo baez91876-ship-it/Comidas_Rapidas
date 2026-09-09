@@ -29,8 +29,9 @@
             icon="shopping_bag"
             aria-label="Ver pedido"
             class="cart-button"
+            @click="cartOpen = true"
           >
-            <q-badge color="accent" floating rounded>0</q-badge>
+            <q-badge color="accent" floating rounded>{{ itemCount }}</q-badge>
             <q-tooltip>Tu pedido</q-tooltip>
           </q-btn>
         </q-toolbar>
@@ -127,15 +128,78 @@
         </div>
         <router-view />
       </q-page-container>
+
+      <q-dialog v-model="cartOpen" position="right">
+        <q-card class="cart-panel">
+          <q-card-section class="row items-center no-wrap">
+            <div>
+              <div class="cart-kicker">Tu pedido</div>
+              <div class="cart-title">Lo que vas a disfrutar</div>
+            </div>
+            <q-space />
+            <q-btn v-close-popup flat round icon="close" aria-label="Cerrar pedido" />
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section v-if="cart.items.length" class="cart-items">
+            <div v-for="item in cart.items" :key="item.name" class="cart-item">
+              <q-img :src="item.image" :alt="item.name" class="cart-item-image" />
+              <div class="cart-item-info">
+                <div class="cart-item-name">{{ item.name }}</div>
+                <div class="cart-item-price">{{ formatPrice(item.price) }}</div>
+                <div class="row items-center q-mt-sm">
+                  <q-btn flat round dense icon="remove" size="sm" @click="changeQuantity(item.name, -1)" />
+                  <span class="cart-quantity">{{ item.quantity }}</span>
+                  <q-btn flat round dense icon="add" size="sm" @click="changeQuantity(item.name, 1)" />
+                  <q-btn flat round dense color="negative" icon="delete_outline" size="sm" class="q-ml-auto" @click="removeFromCart(item.name)" />
+                </div>
+              </div>
+            </div>
+          </q-card-section>
+
+          <q-card-section v-else class="empty-cart">
+            <q-icon name="shopping_bag" size="52px" color="grey-5" />
+            <div class="text-subtitle1 text-weight-bold q-mt-md">Tu pedido esta vacio</div>
+            <div class="text-caption text-grey-7 q-mt-xs">Agrega tus favoritos desde cualquier categoria.</div>
+            <q-btn v-close-popup unelevated color="accent" text-color="dark" no-caps label="Explorar menu" to="/categoria/hamburguesas" class="q-mt-lg" />
+          </q-card-section>
+
+          <template v-if="cart.items.length">
+            <q-separator />
+            <q-card-section>
+              <div class="row items-center justify-between cart-total">
+                <span>Total</span>
+                <strong>{{ formatPrice(total) }}</strong>
+              </div>
+              <q-btn
+                unelevated
+                color="accent"
+                text-color="dark"
+                no-caps
+                icon="chat"
+                label="Pedir por WhatsApp"
+                :href="whatsappLink"
+                target="_blank"
+                class="full-width q-mt-md"
+              />
+            </q-card-section>
+          </template>
+        </q-card>
+      </q-dialog>
     </q-layout>
   </q-app>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { categories } from '@/data/menu'
+import { formatPrice } from '@/data/menu'
+import { useCart } from '@/composables/useCart'
 
 const drawerOpen = ref(false)
+const cartOpen = ref(false)
+const { cart, changeQuantity, itemCount, removeFromCart, total } = useCart()
 
 const menuItems = [
   { label: 'Inicio', icon: 'home', to: '/' },
@@ -146,6 +210,11 @@ const menuItems = [
   })),
   { label: 'Nosotros', icon: 'groups', to: '/nosotros' }
 ]
+
+const whatsappLink = computed(() => {
+  const order = cart.items.map((item) => `${item.quantity}x ${item.name}`).join(', ')
+  return `https://wa.me/573004567890?text=${encodeURIComponent(`Hola, quiero pedir: ${order}. Total: ${formatPrice(total.value)}`)}`
+})
 </script>
 
 <style scoped>
@@ -204,6 +273,94 @@ const menuItems = [
 
 .cart-button {
   color: #fffaf0;
+}
+
+.cart-panel {
+  width: min(410px, 100vw);
+  min-height: 100%;
+  background: #fffaf0;
+}
+
+.cart-kicker {
+  color: #b56a2c;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.cart-title {
+  margin-top: 4px;
+  color: #1d2420;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.cart-items {
+  max-height: calc(100vh - 220px);
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: flex;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e9e3d6;
+}
+
+.cart-item:last-child {
+  border-bottom: 0;
+}
+
+.cart-item-image {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 auto;
+  border-radius: 10px;
+}
+
+.cart-item-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.cart-item-name {
+  color: #1d2420;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.cart-item-price {
+  margin-top: 3px;
+  color: #b55d2d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cart-quantity {
+  min-width: 22px;
+  color: #1d2420;
+  text-align: center;
+  font-weight: 700;
+}
+
+.cart-total {
+  color: #1d2420;
+  font-size: 18px;
+}
+
+.cart-total strong {
+  color: #b55d2d;
+}
+
+.empty-cart {
+  display: flex;
+  min-height: 340px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  text-align: center;
 }
 
 .desktop-nav {

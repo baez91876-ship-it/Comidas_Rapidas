@@ -39,7 +39,7 @@
               </div>
               <strong class="product-price">{{ formatPrice(product.price) }}</strong>
             </div>
-            <q-btn outline color="dark" no-caps icon="add" label="Agregar" class="add-button q-mt-md full-width" />
+            <q-btn outline color="dark" no-caps icon="add" label="Agregar al pedido" class="add-button q-mt-md full-width" @click="addToCart(product)" />
           </q-card-section>
         </q-card>
       </section>
@@ -65,9 +65,11 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatPrice, getCategory } from '@/data/menu'
+import { useCart } from '@/composables/useCart'
 
 const route = useRoute()
 const category = computed(() => getCategory(route.params.slug))
+const { addToCart } = useCart()
 </script>
 
 <style scoped>

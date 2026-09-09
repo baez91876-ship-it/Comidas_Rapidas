@@ -18,31 +18,24 @@
       <section class="home-heading">
         <div>
           <div class="eyebrow">Menu digital</div>
-          <h2>Que se te antoja hoy?</h2>
+          <h2>Explora nuestro menu</h2>
         </div>
-        <span>Explora por categoria</span>
+        <q-btn unelevated color="accent" text-color="dark" no-caps label="Ver hamburguesas" icon-right="arrow_forward" to="/categoria/hamburguesas" />
       </section>
 
-      <section class="category-grid">
-        <q-card v-for="category in categories" :key="category.slug" flat bordered class="category-card" :to="`/categoria/${category.slug}`">
-          <q-img :src="category.banner" :alt="category.label" :ratio="1.35">
-            <div class="absolute-bottom category-card-label">
-              <q-icon :name="category.icon" size="20px" />
-              <span>{{ category.label }}</span>
-            </div>
-          </q-img>
-          <q-card-section>
-            <p>{{ category.description }}</p>
-            <q-btn flat color="dark" no-caps label="Ver opciones" icon-right="arrow_forward" class="q-px-none" />
-          </q-card-section>
-        </q-card>
+      <section class="menu-guide">
+        <q-icon name="restaurant_menu" size="38px" color="accent" />
+        <div>
+          <h3>Encuentra todo desde Explorar menu</h3>
+          <p>Hamburguesas, perros, pizzas, bebidas, postres y promociones en un solo lugar.</p>
+        </div>
+        <q-icon name="arrow_forward" size="24px" class="guide-arrow" />
       </section>
     </div>
   </q-page>
 </template>
 
 <script setup>
-import { categories } from '@/data/menu'
 </script>
 
 <style scoped>
@@ -135,64 +128,48 @@ import { categories } from '@/data/menu'
   font-size: 13px;
 }
 
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 26px;
-}
-
-.category-card {
-  overflow: hidden;
-  border-color: #e9e3d6;
-  border-radius: 16px;
-  background: #fff;
-  transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.category-card:hover {
-  box-shadow: 0 14px 28px rgba(29, 36, 32, 0.1);
-  transform: translateY(-4px);
-}
-
-.category-card-label {
+.menu-guide {
   display: flex;
   align-items: center;
   gap: 9px;
-  padding: 16px;
-  background: linear-gradient(transparent, rgba(15, 20, 17, 0.84));
+  margin-top: 26px;
+  padding: 30px 34px;
+  border-radius: 16px;
+  background: #1d2420;
   color: #fffaf0;
-  font-size: 18px;
+}
+
+.menu-guide h3 {
+  margin: 0;
+  font-size: 21px;
   font-weight: 800;
 }
 
-.category-card p {
-  min-height: 42px;
-  margin: 0;
-  color: #6f786f;
+.menu-guide p {
+  margin: 5px 0 0;
+  color: #c1cbc0;
   font-size: 13px;
   line-height: 1.5;
 }
 
+.guide-arrow {
+  margin-left: auto;
+  color: #f2a649;
+}
+
 @media (max-width: 760px) {
-  .home-hero {
-    min-height: 520px;
-    background-position: 62% center;
+  .menu-guide {
+    align-items: flex-start;
   }
 
-  .hero-note {
-    right: 24px;
-    left: 24px;
-  }
-
-  .category-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .guide-arrow {
+    display: none;
   }
 }
 
 @media (max-width: 520px) {
-  .category-grid {
-    grid-template-columns: 1fr;
+  .menu-guide {
+    padding: 24px;
   }
 }
 </style>
