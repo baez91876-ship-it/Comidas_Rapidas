@@ -6,9 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
@@ -36,18 +34,23 @@ jobs:
         working-directory: hoy
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: hoy/dist/spa
+      - name: Prepare docs folder
+        shell: bash
+        run: |
+          rm -rf docs
+          mkdir -p docs
+          cp -R hoy/dist/spa/. docs/
+          touch docs/.nojekyll
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish docs folder
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            echo "No docs changes to publish"
+          else
+            git commit -m "Deploy site to docs [skip ci]"
+            git push
+          fi
