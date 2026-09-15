@@ -183,7 +183,7 @@ const addProductToCart = (product) => {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(12px, 2vw, 18px);
   margin-top: 24px;
 }
@@ -219,8 +219,8 @@ const addProductToCart = (product) => {
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 188px;
-  padding: 18px;
+  min-height: 210px;
+  padding: 20px;
 }
 
 .product-content .row,
@@ -341,6 +341,7 @@ const addProductToCart = (product) => {
 
   .product-content {
     min-height: 0;
+    padding: 18px;
   }
 
   .product-actions {

@@ -25,7 +25,8 @@
 .home-hero {
   position: relative;
   display: flex;
-  min-height: calc(100vh - 132px);
+  min-height: calc(100vh - 118px);
+  min-height: calc(100svh - 118px);
   align-items: center;
   padding: clamp(56px, 9vw, 110px) max(24px, calc((100% - 1132px) / 2));
   background: linear-gradient(90deg, rgba(21, 29, 24, 0.96) 0%, rgba(21, 29, 24, 0.74) 48%, rgba(21, 29, 24, 0.08) 100%), url('https://images.unsplash.com/photo-1576867757603-05b134ebc379?auto=format&fit=crop&w=2000&q=88') center / cover;
@@ -78,7 +79,8 @@
 
 @media (max-width: 760px) {
   .home-hero {
-    min-height: calc(100vh - 86px);
+    min-height: calc(100vh - 64px);
+    min-height: calc(100svh - 64px);
     align-items: flex-start;
     padding-top: 76px;
     background-position: 62% center;
