@@ -1,8 +1,10 @@
 <script setup>
 const promotions = [
-  { title: 'Combo Brasa', description: 'Hamburguesa clásica, papas y bebida.', price: '$24.900', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1000&q=85' },
-  { title: 'Pizza para compartir', description: 'Pizza grande de pepperoni + gaseosa 1.5 L.', price: '$39.900', image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1000&q=85' },
-  { title: 'Martes de perros', description: 'Lleva 2 perros especiales y paga 1.', price: '$16.500', image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1000&q=85' }
+  { title: 'Combo Brasa', description: 'Hamburguesa clásica, papas y bebida.', price: '$24.900', image: 'https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=1000&q=85' },
+  { title: 'Pizza para compartir', description: 'Pizza grande de pepperoni + gaseosa 1.5 L.', price: '$39.900', image: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=1000&q=85' },
+  { title: 'Martes de perros', description: 'Lleva 2 perros especiales y paga 1.', price: '$16.500', image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1000&q=85' },
+  { title: 'Combo Perro + Papas', description: 'Perro tocineta, papas medianas y gaseosa personal.', price: '$24.900', image: 'https://images.unsplash.com/photo-1541214113241-21578d2d9b62?auto=format&fit=crop&w=1000&q=85' },
+  { title: 'Final Dulce', description: 'Churros con arequipe y brownie con helado para compartir.', price: '$19.900', image: 'https://images.unsplash.com/photo-1624371414361-e670edf4898d?auto=format&fit=crop&w=1000&q=85' }
 ]
 function takePromotion(title) { window.alert(`${title} se agregó al pedido.`) }
 function googleImageSearch(title) { return `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(title + ' comida rápida')}` }
