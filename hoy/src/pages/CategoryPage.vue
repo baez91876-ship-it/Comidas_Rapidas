@@ -50,7 +50,7 @@
                 class="menu-quantity"
                 @update:model-value="setProductQuantity(product.name, $event)"
               />
-              <q-btn outline color="dark" no-caps icon="add" label="Agregar al pedido" class="add-button full-width" @click="addProductToCart(product)" />
+              <q-btn outline color="dark" no-caps icon="add" label="Agregar al pedido" class="add-button" @click="addProductToCart(product)" />
             </div>
           </q-card-section>
         </q-card>
@@ -250,7 +250,11 @@ const addProductToCart = (product) => {
 }
 
 .add-button {
+  flex: 1;
+  min-height: 36px;
+  padding: 0 10px;
   border-radius: 9px;
+  font-size: 12px;
 }
 
 .product-actions {
@@ -325,6 +329,12 @@ const addProductToCart = (product) => {
     font-size: 14px;
   }
 
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   .product-grid {
     grid-template-columns: 1fr;
   }
@@ -339,6 +349,10 @@ const addProductToCart = (product) => {
   }
 
   .menu-quantity {
+    width: 100%;
+  }
+
+  .add-button {
     width: 100%;
   }
 
