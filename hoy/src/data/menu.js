@@ -23,9 +23,9 @@ export const categories = [
     banner: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=1800&q=85',
     accent: '#e39b3b',
     products: [
-      { name: 'Perro Tradicional', description: 'Salchicha, papa ripio, queso, cebolla y salsas clasicas.', price: 14500, tag: 'Clasico', image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=900&q=85' },
-      { name: 'Perro Mexicano', description: 'Salchicha, guacamole, pico de gallo, jalapeno y nachos.', price: 18900, tag: 'Picante', image: 'https://images.unsplash.com/photo-1619740455993-9e612b1d9c16?auto=format&fit=crop&w=900&q=85' },
-      { name: 'Perro Tocineta', description: 'Salchicha, tocineta, queso fundido, maiz y salsa de la casa.', price: 17900, tag: 'Mas pedido', image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=900&q=85' },
+      { name: 'Perro Tradicional', description: 'Salchicha, papa ripio, queso, cebolla y salsas clasicas.', price: 14500, tag: 'Clasico', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRH5ePScpHmk2luurRRyC1sfJf3ZJSJa1FrzceqascuSM-XWfUYhWtmJ5LM&s=10' },
+      { name: 'Perro Mexicano', description: 'Salchicha, guacamole, pico de gallo, jalapeno y nachos.', price: 18900, tag: 'Picante', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Q6QSZHk82Ival0-P_xWPFlWz0ZW8YCuI6qZW0bBJyQ&s=10' },
+      { name: 'Perro Tocineta', description: 'Salchicha, tocineta, queso fundido, maiz y salsa de la casa.', price: 17900, tag: 'Mas pedido', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCY5mf3UkeIAs-xtE6RITXtV_zTUJE3wV9BS3lslwhW01c8ITbBqt3Ke25&s=10' },
       { name: 'Perro Veggie', description: 'Salchicha vegetal, champinones, cebolla caramelizada y mostaza miel.', price: 16900, tag: 'Vegetariano', image: 'https://images.unsplash.com/photo-1612392062631-94dd858cba88?auto=format&fit=crop&w=900&q=85' }
     ],
     chef: 'Perro Mexicano',

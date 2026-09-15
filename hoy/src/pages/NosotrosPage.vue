@@ -158,10 +158,16 @@ const team = [
 }
 
 .team-card {
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   border-color: #e9e3d6;
   border-radius: 16px;
   background: #fff;
+}
+
+.team-card .q-card__section {
+  flex: 1;
 }
 
 .team-card h3 {

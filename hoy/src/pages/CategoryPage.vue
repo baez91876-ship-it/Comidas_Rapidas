@@ -39,7 +39,19 @@
               </div>
               <strong class="product-price">{{ formatPrice(product.price) }}</strong>
             </div>
-            <q-btn outline color="dark" no-caps icon="add" label="Agregar al pedido" class="add-button q-mt-md full-width" @click="addToCart(product)" />
+            <div class="product-actions q-mt-md">
+              <q-input
+                :model-value="getProductQuantity(product.name)"
+                type="number"
+                min="1"
+                dense
+                outlined
+                label="Cantidad"
+                class="menu-quantity"
+                @update:model-value="setProductQuantity(product.name, $event)"
+              />
+              <q-btn outline color="dark" no-caps icon="add" label="Agregar al pedido" class="add-button full-width" @click="addProductToCart(product)" />
+            </div>
           </q-card-section>
         </q-card>
       </section>
@@ -62,7 +74,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatPrice, getCategory } from '@/data/menu'
 import { useCart } from '@/composables/useCart'
@@ -70,6 +82,18 @@ import { useCart } from '@/composables/useCart'
 const route = useRoute()
 const category = computed(() => getCategory(route.params.slug))
 const { addToCart } = useCart()
+const productQuantities = reactive({})
+
+const getProductQuantity = (productName) => productQuantities[productName] || 1
+
+const setProductQuantity = (productName, quantity) => {
+  productQuantities[productName] = Math.max(1, Math.floor(Number(quantity) || 1))
+}
+
+const addProductToCart = (product) => {
+  addToCart(product, getProductQuantity(product.name))
+  productQuantities[product.name] = 1
+}
 </script>
 
 <style scoped>
@@ -160,11 +184,14 @@ const { addToCart } = useCart()
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  gap: clamp(12px, 2vw, 18px);
   margin-top: 24px;
 }
 
 .product-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
   overflow: hidden;
   border-color: #e9e3d6;
   border-radius: 16px;
@@ -189,8 +216,16 @@ const { addToCart } = useCart()
 }
 
 .product-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   min-height: 188px;
   padding: 18px;
+}
+
+.product-content .row,
+.product-content .col {
+  min-width: 0;
 }
 
 .product-content h3 {
@@ -216,6 +251,18 @@ const { addToCart } = useCart()
 
 .add-button {
   border-radius: 9px;
+}
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.menu-quantity {
+  width: 104px;
+  flex: 0 0 auto;
 }
 
 .chef-pick {
@@ -280,6 +327,19 @@ const { addToCart } = useCart()
 
   .product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .product-content {
+    min-height: 0;
+  }
+
+  .product-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .menu-quantity {
+    width: 100%;
   }
 
   .chef-pick {

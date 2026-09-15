@@ -34,6 +34,17 @@
             <q-badge color="accent" floating rounded>{{ itemCount }}</q-badge>
             <q-tooltip>Tu pedido</q-tooltip>
           </q-btn>
+
+          <q-btn
+            flat
+            round
+            :icon="isDarkMode ? 'dark_mode' : 'light_mode'"
+            :aria-label="isDarkMode ? 'Activar modo claro' : 'Activar modo oscuro'"
+            class="theme-button"
+            @click="toggleDarkMode"
+          >
+            <q-tooltip>{{ isDarkMode ? 'Modo claro' : 'Modo oscuro' }}</q-tooltip>
+          </q-btn>
         </q-toolbar>
       </q-header>
 
@@ -149,9 +160,18 @@
                 <div class="cart-item-name">{{ item.name }}</div>
                 <div class="cart-item-price">{{ formatPrice(item.price) }}</div>
                 <div class="row items-center q-mt-sm">
-                  <q-btn flat round dense icon="remove" size="sm" @click="changeQuantity(item.name, -1)" />
-                  <span class="cart-quantity">{{ item.quantity }}</span>
-                  <q-btn flat round dense icon="add" size="sm" @click="changeQuantity(item.name, 1)" />
+                  <q-btn flat round dense icon="remove" size="sm" aria-label="Disminuir cantidad" @click="changeQuantity(item.name, -1)" />
+                  <q-input
+                    :model-value="item.quantity"
+                    type="number"
+                    min="1"
+                    dense
+                    borderless
+                    input-class="cart-quantity"
+                    aria-label="Cantidad del producto"
+                    @update:model-value="setQuantity(item.name, $event)"
+                  />
+                  <q-btn flat round dense icon="add" size="sm" aria-label="Aumentar cantidad" @click="changeQuantity(item.name, 1)" />
                   <q-btn flat round dense color="negative" icon="delete_outline" size="sm" class="q-ml-auto" @click="removeFromCart(item.name)" />
                 </div>
               </div>
@@ -193,13 +213,20 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { Dark } from 'quasar'
 import { categories } from '@/data/menu'
 import { formatPrice } from '@/data/menu'
 import { useCart } from '@/composables/useCart'
 
 const drawerOpen = ref(false)
 const cartOpen = ref(false)
-const { cart, changeQuantity, itemCount, removeFromCart, total } = useCart()
+const isDarkMode = ref(Dark.isActive)
+const { cart, changeQuantity, itemCount, removeFromCart, setQuantity, total } = useCart()
+
+function toggleDarkMode() {
+  Dark.set(!isDarkMode.value)
+  isDarkMode.value = Dark.isActive
+}
 
 const menuItems = [
   { label: 'Inicio', icon: 'home', to: '/' },
@@ -275,6 +302,10 @@ const whatsappLink = computed(() => {
   color: #fffaf0;
 }
 
+.theme-button {
+  color: #f2a649;
+}
+
 .cart-panel {
   width: min(410px, 100vw);
   min-height: 100%;
@@ -342,6 +373,14 @@ const whatsappLink = computed(() => {
   color: #1d2420;
   text-align: center;
   font-weight: 700;
+}
+
+.cart-item .q-input {
+  width: 52px;
+}
+
+.cart-item .q-field__native {
+  text-align: center;
 }
 
 .cart-total {
@@ -466,6 +505,18 @@ const whatsappLink = computed(() => {
 }
 
 @media (max-width: 599px) {
+  .brand-link {
+    gap: 6px;
+  }
+
+  .brand-name {
+    font-size: 14px;
+  }
+
+  .brand-caption {
+    display: none;
+  }
+
   .desktop-nav {
     display: none;
   }

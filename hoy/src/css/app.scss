@@ -1,1 +1,85 @@
 // app global css
+
+body.body--dark {
+	background: #121212;
+	color: #f4efe4;
+}
+
+body.body--dark .app-shell,
+body.body--dark .category-page,
+body.body--dark .home-page,
+body.body--dark .about-page,
+body.body--dark .desktop-nav,
+body.body--dark .dropdown-panel,
+body.body--dark .app-drawer,
+body.body--dark .cart-panel {
+	background: #121212;
+	color: #f4efe4;
+}
+
+body.body--dark .desktop-nav {
+	border-bottom-color: #343934;
+}
+
+body.body--dark .product-card,
+body.body--dark .info-card,
+body.body--dark .team-card {
+	background: #1d2420;
+	border-color: #343934;
+}
+
+body.body--dark .product-content h3,
+body.body--dark .section-heading h2,
+body.body--dark .about-intro h1,
+body.body--dark .info-label,
+body.body--dark .team-card h3,
+body.body--dark .cart-title,
+body.body--dark .cart-item-name,
+body.body--dark .cart-quantity,
+body.body--dark .cart-total,
+body.body--dark .dropdown-title,
+body.body--dark .category-option,
+body.body--dark .about-option {
+	color: #f4efe4;
+}
+
+body.body--dark .product-content p,
+body.body--dark .chef-pick p,
+body.body--dark .info-card p,
+body.body--dark .team-card p,
+body.body--dark .about-intro p,
+body.body--dark .product-count,
+body.body--dark .category-breadcrumbs,
+body.body--dark .dropdown-description,
+body.body--dark .category-option .q-item__label--caption {
+	color: #aeb8ae;
+}
+
+body.body--dark .cart-item {
+	border-bottom-color: #343934;
+}
+
+body.body--dark .product-image {
+	background: #343934;
+}
+
+body.body--dark .category-option:hover,
+body.body--dark .about-option:hover {
+	background: #2b332d;
+}
+
+body.body--dark .drawer-promo {
+	background: #2b332d;
+}
+
+body.body--dark .hero-overlay {
+	background: linear-gradient(90deg, rgba(4, 6, 5, 0.88), rgba(4, 6, 5, 0.22));
+}
+
+body.body--dark .home-hero {
+	background-image: linear-gradient(90deg, rgba(4, 6, 5, 0.98) 0%, rgba(4, 6, 5, 0.82) 48%, rgba(4, 6, 5, 0.18) 100%), url('https://images.unsplash.com/photo-1576867757603-05b134ebc379?auto=format&fit=crop&w=2000&q=88');
+}
+
+body.body--dark .app-shell :is(h1, h2, h3, p, span, strong, a, .q-btn__content, .q-item__label, .q-breadcrumbs__el, .q-breadcrumbs__el--last) {
+	color: #fff !important;
+}
