@@ -53,7 +53,7 @@
 
 <script setup>
 const team = [
-  { name: 'Camila Torres', role: 'Chef principal', description: 'Convierte ingredientes sencillos en recetas con mucho sabor.', image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=85' },
+  { name: 'Camilo Torres', role: 'Chef principal', description: 'Convierte ingredientes sencillos en recetas con mucho sabor.', image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=85' },
   { name: 'Juan Esteban', role: 'Atencion y caja', description: 'Te ayuda a elegir y se asegura de que tu pedido salga perfecto.', image: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=85' },
   { name: 'Mateo Rios', role: 'Domicilios', description: 'Lleva cada pedido caliente y a tiempo hasta tu puerta.', image: 'https://images.unsplash.com/photo-1616401784845-180882ba9ba8?auto=format&fit=crop&w=800&q=85' }
 ]
